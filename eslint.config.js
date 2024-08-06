@@ -2,6 +2,7 @@ import globals from 'globals';
 import pluginJs from '@eslint/js';
 import eslintPluginPrettierRecommended from 'eslint-plugin-prettier/recommended';
 import eslintPluginVue from 'eslint-plugin-vue';
+import autoImportJson from './.cache/auto-imports.json';
 
 export default [
     {
@@ -10,11 +11,7 @@ export default [
             globals: {
                 ...globals.browser,
                 ...globals.node,
-                ref: 'readonly',
-                computed: 'readonly',
-                watch: 'readonly',
-                watchEffect: 'readonly',
-                useGlobal: 'readonly'
+                ...autoImportJson.globals
             }
         }
     },
