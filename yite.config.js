@@ -46,7 +46,7 @@ export const yiteConfig = {
                 'vue-i18n',
                 'js-md5',
                 'axios',
-                '@yicode/yidash',
+                'yidash',
                 'date-fns',
                 'date-fns/locale',
                 'tiny-cookie',
