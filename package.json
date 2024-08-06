@@ -22,8 +22,6 @@
         "inspect": "eslint --inspect-config",
         "dev": "yite --command=dev --envfile=development --workdir=./",
         "build": "yite --command=build --envfile=production --workdir=./",
-        "dev": "yite --command=dev --envfile=development --workdir=./",
-        "build": "yite --command=build --envfile=production --workdir=./",
         "update:template": "yite --command=update --project-type=yiadmin"
     },
     "keywords": [
@@ -45,22 +43,22 @@
         "README.md",
         "yite.config.js"
     ],
-
     "dependencies": {
         "@arco-design/web-vue": "^2.56.0",
         "@arco-plugins/vite-vue": "^1.4.5",
-        "@iconify/json": "^2.2.232",
+        "@iconify/json": "^2.2.234",
         "@yicode/yidash": "^3.11.2",
-        "axios": "^1.7.2",
+        "axios": "^1.7.3",
         "date-fns": "^3.6.0",
         "js-md5": "^0.8.3",
         "lodash-es": "^4.17.21",
         "pinia": "^2.2.0",
         "sass": "^1.77.8",
         "store2": "^2.14.3",
-        "vue": "^3.4.34",
+        "vue": "^3.4.35",
         "vue-i18n": "^9.13.1",
-        "vue-router": "^4.4.0"
+        "vue-router": "^4.4.2",
+        "yite-cli": "link:..\\yite-cli"
     },
     "devDependencies": {
         "@eslint/config-inspector": "^0.5.2",
@@ -70,10 +68,9 @@
         "eslint-plugin-prettier": "^5.2.1",
         "eslint-plugin-vue": "^9.27.0",
         "globals": "^15.9.0",
-        "lint-staged": "^15.2.7",
+        "lint-staged": "^15.2.8",
         "prettier": "^3.3.3",
-        "simple-git-hooks": "^2.11.1",
-        "@yicode/yite-cli": "^2.8.0"
+        "simple-git-hooks": "^2.11.1"
     },
     "simple-git-hooks": {
         "pre-commit": "pnpm lint-staged"
