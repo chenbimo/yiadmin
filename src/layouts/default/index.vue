@@ -1,9 +1,9 @@
 <template>
     <a-layout class="layout-default">
         <a-layout-sider class="layout-sider" :collapsed="$Data.collapsed" :width="240" collapsible hide-trigger>
-            <div class="info-area">
+            <div class="info-area" @click="$Router.push('/')">
                 <div class="logo bg-contain" :style="{ backgroundImage: 'url(' + utilInternalAssets('logo.png') + ')' }"></div>
-                <div class="name">{{ $GlobalData.appConfig.name }}后台</div>
+                <div class="name">{{ $GlobalData.appConfig.name }}</div>
             </div>
             <div class="menu-area"></div>
             <sideMenu v-if="$Data.isShow.sideMenu === true" :openMenuId="$Data.openMenuId" :selectedItemId="$Data.selectedItemId" :menuObject="$Data.menuObject" :menuTree="$Data.menuTree"></sideMenu>
@@ -48,7 +48,7 @@
 
 <script setup>
 // 外部集
-import { yd_tree_array2Tree } from '@yicode/yidash';
+import { yd_tree_array2Tree } from 'yidash';
 import { keyBy as _keyBy, cloneDeep as _cloneDeep, sortBy as _sortBy } from 'lodash-es';
 
 // 内部集
@@ -117,7 +117,7 @@ const $Method = {
     async apiGetAdminMenus() {
         try {
             const res = await $Http({
-                url: '/admin/menu',
+                url: '/admin/getMenus',
                 data: {}
             });
             $Data.menuObject = _keyBy(_cloneDeep(res.data.rows), 'id');
@@ -163,6 +163,7 @@ $Method.initData();
             align-items: center;
             padding: 20px 10px;
             background-color: #eef5f8;
+            cursor: pointer;
             .logo {
                 width: 60px;
                 height: 60px;
