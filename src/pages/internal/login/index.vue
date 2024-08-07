@@ -96,7 +96,7 @@ const $Method = {
         try {
             $Data.isShow.logining = true;
             const res = await $Http({
-                url: '/admin/login',
+                url: '/admin/adminLogin',
                 data: {
                     account: $Data.formData.account,
                     password: md5($Data.formData.password)

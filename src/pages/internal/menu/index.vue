@@ -51,7 +51,7 @@
 
 <script setup>
 // 外部集
-import { yd_tree_array2Tree, yd_datetime_relativeTime } from '@yicode/yidash';
+import { yd_tree_array2Tree, yd_datetime_relativeTime } from 'yidash';
 import { sortBy as _sortBy } from 'lodash-es';
 
 // 内部集
@@ -145,7 +145,7 @@ const $Method = {
     async apiSelectData() {
         try {
             const res = await $Http({
-                url: '/menu/selectAll',
+                url: '/admin/menuSelectAll',
                 data: {
                     page: $Data.pagination.page,
                     limit: $GlobalData.pageLimit

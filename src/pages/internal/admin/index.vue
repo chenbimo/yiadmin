@@ -113,7 +113,7 @@ const $Method = {
     async apiSelectData() {
         try {
             const res = await $Http({
-                url: '/admin/select',
+                url: '/admin/adminSelectPage',
                 data: {
                     page: $Data.pagination.page,
                     limit: $GlobalData.pageLimit
@@ -122,7 +122,9 @@ const $Method = {
             $Data.tableData = res.data.rows;
             $Data.pagination.total = res.data.total;
         } catch (err) {
-        } finally {
+            Message.error({
+                content: err.msg || err
+            });
         }
     }
 };

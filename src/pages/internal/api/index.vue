@@ -27,7 +27,7 @@
 
 <script setup>
 // 外部集
-import { yd_tree_array2Tree, yd_datetime_relativeTime } from '@yicode/yidash';
+import { yd_tree_array2Tree, yd_datetime_relativeTime } from 'yidash';
 import { sortBy as _sortBy } from 'lodash-es';
 
 // 选项集
@@ -59,7 +59,7 @@ const $Method = {
     async apiSelectData() {
         try {
             const res = await $Http({
-                url: '/api/selectAll',
+                url: '/admin/apiSelectAll',
                 data: {
                     page: $Data.pagination.page,
                     limit: $GlobalData.pageLimit
@@ -67,7 +67,11 @@ const $Method = {
             });
 
             $Data.tableData = yd_tree_array2Tree(_sortBy(yd_datetime_relativeTime(res.data.rows), 'sort'));
-        } catch (err) {}
+        } catch (err) {
+            Message.error({
+                content: err.msg || err
+            });
+        }
     }
 };
 

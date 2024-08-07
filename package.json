@@ -47,7 +47,6 @@
         "@arco-design/web-vue": "^2.56.0",
         "@arco-plugins/vite-vue": "^1.4.5",
         "@iconify/json": "^2.2.234",
-        "@yicode/yidash": "^3.11.2",
         "axios": "^1.7.3",
         "date-fns": "^3.6.0",
         "js-md5": "^0.8.3",
@@ -58,6 +57,7 @@
         "vue": "^3.4.35",
         "vue-i18n": "^9.13.1",
         "vue-router": "^4.4.2",
+        "yidash": "link:..\\yidash",
         "yite-cli": "link:..\\yite-cli"
     },
     "devDependencies": {

@@ -37,7 +37,7 @@
 </template>
 <script setup>
 // 外部集
-import { yd_tree_array2Tree } from '@yicode/yidash';
+import { yd_tree_array2Tree } from 'yidash';
 import { cloneDeep as _cloneDeep, keyBy as _keyBy, concat as _concat } from 'lodash-es';
 
 // 内部集

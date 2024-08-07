@@ -47,6 +47,8 @@
 </template>
 
 <script setup>
+// 外部集
+import { yd_datetime_relativeTime } from 'yidash';
 // 内部集
 import editDataDrawer from './components/editDataDrawer.vue';
 
@@ -116,7 +118,7 @@ const $Method = {
     async apiSelectData() {
         try {
             const res = await $Http({
-                url: '/role/select',
+                url: '/admin/roleSelectPage',
                 data: {
                     page: $Data.pagination.page,
                     limit: $GlobalData.pageLimit
@@ -125,6 +127,9 @@ const $Method = {
             $Data.tableData = yd_datetime_relativeTime(res.data.rows);
             $Data.pagination.total = res.data.total;
         } catch (err) {
+            Message.error({
+                content: err.msg || err
+            });
             console.log('🚀 ~ file: index.vue:122 ~ apiSelectData ~ err:', err);
         }
     }
