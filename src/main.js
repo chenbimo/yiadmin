@@ -1,12 +1,10 @@
 import App from '@/App.vue';
 
-const app = createApp(App);
+const $App = createApp(App);
+const $Pinia = createPinia();
 
-const $Pinia = Pinia.createPinia();
+$App.use($Router);
+$App.use($Pinia);
+$App.use($I18n);
 
-app.use($Router);
-console.log('🚀 ~ $Router:', $Router);
-app.use($Pinia);
-app.use($I18n);
-
-app.mount('#app');
+$App.mount('#app');

@@ -1,7 +1,12 @@
 <template>
     <div class="page-api page-full">
         <div class="page-action">
-            <div class="left"></div>
+            <div class="left">
+                <div class="common-badge">
+                    <div class="label">接口总数</div>
+                    <div class="value">{{ $Data.apiTotal }}个</div>
+                </div>
+            </div>
             <div class="right">
                 <a-input placeholder="请输入搜索关键字" allow-clear></a-input>
                 <div class="w-10px"></div>
@@ -16,7 +21,7 @@
                     <a-table-column title="描述" data-index="describe" ellipsis tooltip></a-table-column>
                     <a-table-column title="排序" data-index="sort" :width="80" ellipsis tooltip></a-table-column>
                     <a-table-column title="ID" data-index="id" :width="180" ellipsis tooltip></a-table-column>
-                    <a-table-column title="上级" data-index="pid" :width="350" ellipsis tooltip></a-table-column>
+                    <a-table-column title="上级" data-index="pid" :width="100" ellipsis tooltip></a-table-column>
                     <a-table-column title="创建时间" data-index="created_at2" :width="150"></a-table-column>
                     <a-table-column title="更新时间" data-index="updated_at2" :width="150"></a-table-column>
                 </template>
@@ -47,6 +52,9 @@ const $Data = $ref({
         page: 1,
         total: 0
     },
+    // 接口总数
+    apiTotal: '',
+    // 列表数据
     tableData: []
 });
 
@@ -65,7 +73,7 @@ const $Method = {
                     limit: $GlobalData.pageLimit
                 }
             });
-
+            $Data.apiTotal = res.data.rows?.length || '';
             $Data.tableData = yd_tree_array2Tree(_sortBy(yd_datetime_relativeTime(res.data.rows), 'sort'));
         } catch (err) {
             Message.error({

@@ -5,6 +5,7 @@
     "sideEffects": true,
     "type": "module",
     "private": false,
+    "license": "Apache-2.0",
     "publishConfig": {
         "access": "public",
         "registry": "https://registry.npmjs.org"
@@ -73,9 +74,11 @@
         "simple-git-hooks": "^2.11.1"
     },
     "simple-git-hooks": {
-        "pre-commit": "pnpm lint-staged"
+        "pre-commit": "pnpm exec lint-staged"
     },
     "lint-staged": {
-        "*": "prettier --write ."
+        "*": [
+            "prettier --write --cache --ignore-unknown"
+        ]
     }
 }

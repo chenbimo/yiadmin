@@ -5,9 +5,9 @@
                 <a-button type="primary" @click="$Method.onDataAction('insertData', {})">添加</a-button>
             </div>
             <div class="right">
-                <a-input placeholder="请输入搜索关键字" allow-clear></a-input>
+                <a-input v-model="$Data.formData.keyword" placeholder="请输入搜索关键字" allow-clear @clear="$Method.apiSelectData"></a-input>
                 <div class="w-10px"></div>
-                <a-button type="primary">搜索</a-button>
+                <a-button type="primary" @click="$Method.apiSelectData">搜索</a-button>
             </div>
         </div>
         <div class="page-table">
@@ -15,9 +15,9 @@
                 <template #columns>
                     <a-table-column title="名称" data-index="name" :width="200" ellipsis tooltip></a-table-column>
                     <a-table-column title="编码" data-index="code" :width="150" ellipsis tooltip></a-table-column>
-                    <a-table-column title="描述" data-index="describe" :width="300" ellipsis tooltip></a-table-column>
-                    <a-table-column title="菜单" data-index="menu_ids" :width="500" ellipsis tooltip></a-table-column>
-                    <a-table-column title="接口" data-index="api_ids" :width="500" ellipsis tooltip></a-table-column>
+                    <a-table-column title="描述" data-index="describe" :min-width="350" ellipsis tooltip></a-table-column>
+                    <a-table-column title="菜单" data-index="menu_ids" :width="150" ellipsis tooltip></a-table-column>
+                    <a-table-column title="接口" data-index="api_ids" :width="150" ellipsis tooltip></a-table-column>
                     <a-table-column title="创建时间" data-index="created_at2" :width="150"></a-table-column>
                     <a-table-column title="更新时间" data-index="updated_at2" :width="150"></a-table-column>
                     <a-table-column title="操作" fixed="right" :width="100" align="right">
@@ -80,6 +80,10 @@ const $Data = $ref({
     tableData: [],
     // 行数据
     rowData: {},
+    // 表单参数
+    formData: {
+        keyword: ''
+    },
     // 分页组件数据
     pagination: {
         page: 1,
@@ -120,6 +124,7 @@ const $Method = {
             const res = await $Http({
                 url: '/admin/roleSelectPage',
                 data: {
+                    keyword: $Data.formData.keyword,
                     page: $Data.pagination.page,
                     limit: $GlobalData.pageLimit
                 }

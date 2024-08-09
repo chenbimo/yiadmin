@@ -73,6 +73,24 @@ a {
     overflow-x: hidden;
 }
 
+.common-badge {
+    display: flex;
+    height: 24px;
+    line-height: 24px;
+    background-color: #eee;
+    border-radius: 2px;
+    overflow: hidden;
+    font-size: 14px;
+    .label {
+        padding: 0 8px;
+        background-color: #165dff;
+        color: #fff;
+    }
+    .value {
+        padding: 0 8px;
+    }
+}
+
 .page-full {
     position: absolute;
     top: 15px;

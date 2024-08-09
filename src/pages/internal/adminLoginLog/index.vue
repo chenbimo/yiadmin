@@ -43,7 +43,7 @@ import editDataDrawer from './components/editDataDrawer.vue';
 
 // 选项集
 defineOptions({
-    name: 'dict'
+    name: 'AdminLoginLog'
 });
 
 // 全局集
@@ -101,7 +101,7 @@ const $Method = {
     async apiSelectData() {
         try {
             const res = await $Http({
-                url: '/loginLog/select',
+                url: '/admin/adminLoginLogSelectPage',
                 data: {
                     page: $Data.pagination.page,
                     limit: $GlobalData.pageLimit

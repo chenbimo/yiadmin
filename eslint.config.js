@@ -6,7 +6,6 @@ import autoImportJson from './.cache/auto-imports.json';
 
 export default [
     {
-        files: ['**/*.{mjs,cjs,js}'],
         languageOptions: {
             globals: {
                 ...globals.browser,
