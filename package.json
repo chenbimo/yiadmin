@@ -1,7 +1,7 @@
 {
     "name": "yiadmin",
     "version": "1.5.0",
-    "description": "基于 vue3 + yite-cli + arco-design-vue 的后台管理模板",
+    "description": "fnMap(待办)基于 vue3 + yite-cli + arco-design-vue 的后台管理模板222",
     "sideEffects": true,
     "type": "module",
     "private": false,
@@ -62,13 +62,6 @@
         "yite-cli": "link:..\\yite-cli"
     },
     "devDependencies": {
-        "@eslint/config-inspector": "^0.5.2",
-        "@eslint/js": "^9.8.0",
-        "eslint": "^9.8.0",
-        "eslint-config-prettier": "^9.1.0",
-        "eslint-plugin-prettier": "^5.2.1",
-        "eslint-plugin-vue": "^9.27.0",
-        "globals": "^15.9.0",
         "lint-staged": "^15.2.8",
         "prettier": "^3.3.3",
         "simple-git-hooks": "^2.11.1"

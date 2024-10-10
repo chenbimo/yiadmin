@@ -10,6 +10,7 @@
 const $Method = {
     // 初始化数据
     async initData() {}
+    // fnMap(功能)等一会写一个接口函数
 };
 
 $Method.initData();

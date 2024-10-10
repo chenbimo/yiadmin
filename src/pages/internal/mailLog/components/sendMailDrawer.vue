@@ -6,7 +6,6 @@
                 <a-form-item field="email_type" label="邮件类型">
                     <a-radio-group v-model="$Data.formData.email_type">
                         <a-radio value="common">普通邮件</a-radio>
-                        <a-radio value="verify">验证邮件</a-radio>
                     </a-radio-group>
                 </a-form-item>
                 <a-form-item field="to_email" label="接收者">
@@ -15,10 +14,6 @@
                 <a-form-item field="subject" label="邮件主题">
                     <a-input v-model="$Data.formData.subject" placeholder="不超过200个字符" />
                 </a-form-item>
-                <a-form-item v-if="$Data.formData.email_type === 'verify'" field="verify_name" label="验证码名称">
-                    <a-input v-model="$Data.formData.verify_name" placeholder="小写字母 + [字母|数字] 的组合，如：registerCode" />
-                </a-form-item>
-
                 <a-form-item v-if="$Data.formData.email_type === 'common'" field="content" label="发送内容">
                     <a-textarea v-model="$Data.formData.content" placeholder="长度不超过10000个字符" :max-length="10000" show-word-limit allow-clear />
                 </a-form-item>

@@ -2,7 +2,7 @@
     <div class="page-admin page-full">
         <div class="page-action">
             <div class="left">
-                <a-button type="primary" @click="$Method.onDataAction('insertData', {})">发送邮件</a-button>
+                <a-button type="primary" @click="$Method.onDataAction('insertData', {})">添加</a-button>
             </div>
             <div class="right">
                 <a-input placeholder="请输入搜索关键字" allow-clear></a-input>
@@ -13,18 +13,20 @@
         <div class="page-table">
             <a-table :data="$Data.tableData" :scroll="$GlobalData.tableScroll" :pagination="false" :bordered="$GlobalData.tableBordered" row-key="id">
                 <template #columns>
-                    <a-table-column title="登录邮箱" data-index="login_email" :width="200"></a-table-column>
-                    <a-table-column title="发送者昵称" data-index="from_name" :width="200"></a-table-column>
-                    <a-table-column title="发送者邮箱" data-index="from_email" :width="200"></a-table-column>
-                    <a-table-column title="接收者邮箱" data-index="to_email" :width="200"></a-table-column>
-                    <a-table-column title="邮件类型" data-index="email_type" :width="150">
+                    <a-table-column title="名称" data-index="name" :width="200"></a-table-column>
+                    <a-table-column title="编码" data-index="code" :width="200"></a-table-column>
+                    <a-table-column title="描述" data-index="describe"></a-table-column>
+                    <a-table-column title="操作" fixed="right" :width="100" align="right">
                         <template #cell="{ record }">
-                            <a-tag v-if="record.email_type === 'common'">普通邮件</a-tag>
-                            <a-tag v-if="record.email_type === 'verify'" color="red">验证邮件</a-tag>
+                            <a-dropdown position="br" @select="$Method.onDataAction($event, record)">
+                                <a-button>操作<icon-down /></a-button>
+                                <template #content>
+                                    <a-doption value="updateData"><icon-edit />编辑</a-doption>
+                                    <a-doption value="deleteData"> <icon-delete />删除</a-doption>
+                                </template>
+                            </a-dropdown>
                         </template>
                     </a-table-column>
-                    <a-table-column title="发送时间" data-index="created_at2" :width="150"></a-table-column>
-                    <a-table-column title="发送内容" data-index="text_content" :min-width="300"></a-table-column>
                 </template>
             </a-table>
         </div>
@@ -36,21 +38,20 @@
         </div>
 
         <!-- 编辑数据抽屉 -->
-        <sendMailDrawer v-if="$Data.isShow.sendMailDrawer" v-model="$Data.isShow.sendMailDrawer" @success="$Method.fnFreshData"></sendMailDrawer>
+        <editDataDrawer v-if="$Data.isShow.editDataDrawer" v-model="$Data.isShow.editDataDrawer" :pageConfig="$Data.pageConfig" :actionType="$Data.actionType" :rowData="$Data.rowData" @success="$Method.fnFreshData"></editDataDrawer>
     </div>
 </template>
 
 <script setup>
-// 外部集
-import { yd_datetime_relativeTime } from 'yidash';
-
 // 内部集
-import sendMailDrawer from './components/sendMailDrawer.vue';
+import editDataDrawer from './components/editDataDrawer.vue';
 
 // 外部集
 
 // 选项集
-defineOptions({});
+defineOptions({
+    name: 'MatrixCategory'
+});
 
 // 全局集
 const { $GlobalData, $GlobalComputed, $GlobalMethod } = useGlobal();
@@ -61,11 +62,12 @@ const { $GlobalData, $GlobalComputed, $GlobalMethod } = useGlobal();
 const $Data = $ref({
     // 页面配置
     pageConfig: {
-        name: '邮件日志'
+        name: '产品分类'
     },
     // 显示和隐藏
     isShow: {
-        sendMailDrawer: false
+        editDataDrawer: false,
+        deleteDataDialog: false
     },
     actionType: 'insertData',
     tableData: [],
@@ -87,8 +89,8 @@ const $Method = {
         $Data.rowData = rowData;
 
         // 编辑数据
-        if ($Data.actionType === 'insertData') {
-            $Data.isShow.sendMailDrawer = true;
+        if ($Data.actionType === 'insertData' || $Data.actionType === 'updateData') {
+            $Data.isShow.editDataDrawer = true;
             return;
         }
 
@@ -106,13 +108,13 @@ const $Method = {
     async apiSelectData() {
         try {
             const res = await $Http({
-                url: '/admin/mailSelectPage',
+                url: '/matrix/selectCategoryPage',
                 data: {
                     page: $Data.pagination.page,
                     limit: $GlobalData.pageLimit
                 }
             });
-            $Data.tableData = yd_datetime_relativeTime(res.data.rows);
+            $Data.tableData = res.data.rows;
             $Data.pagination.total = res.data.total;
         } catch (err) {
             console.log('🚀 ~ file: index.vue:86 ~ apiSelectData ~ err:', err);
